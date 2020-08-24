@@ -1,13 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'bookcase_app/base.html' %}
+
+<title>{% block title %}Library-Home{% endblock %}</title>
 
 {% block content%}
-<h1>Library Home</h1>
+    <h1>Library Home</h1>
     
-    <p>Welcome to <strong>Library</strong>!</p>
+    
 
-    <p>You can see the library records below</p>
+    <p>You can see the library records below:</p>
     <ul>
-        <li>Books: {{ book_number }} </li>
+        <li>Books: {{ books_number }}</li>
         <li>Available Books: {{ available_books }}</li>
     </ul>
 

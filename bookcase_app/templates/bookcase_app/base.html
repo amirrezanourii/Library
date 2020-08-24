@@ -1,35 +1,38 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
-
-    {% block title %}Library{% endblock %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'bookcase_app/styles.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "bookcase_app/style.css" %}" rel="stylesheet">
 </head>
 
 <body>
+    <div id="header">
+    <span class="logo">Library</span>
 
-    <div class='container-fluid'>
-
-        <div class='row'>
-            <div class='col-sm-2'>
-            {% block sidebar %}
-            <ul class='sidebar-nav'>
-                <li><a href="{% url 'bookcase_app:index' %}">Home</a></li>
-                <li><a href="">All Books</a></li>
-                <li><a href="">All Authors</a></li>
-            </ul>
-            {% endblock %}
-            </div>
-        </div>
-
+    <ul class="menu">
+        <li {% if section == "All Books" %}class="selected"{% endif %}>
+         <a href="#">All Books</a>
+        </li>
+        <li {% if section == "Availables" %}class="selected"{% endif %}>
+            <a href="#">Availables</a>
+        </li>
+        <li><a href="/admin/">Admin</a></li>
+    </ul>
     </div>
+
+    <br>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+   
 
 </body>
 </html>
+
+
+
+

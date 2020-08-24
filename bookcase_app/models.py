@@ -4,7 +4,7 @@ import uuid
 
 
 class Genre(models.Model):
-    name = models.CharField(max_length=255, help_text="Enter a book genre")
+    name = models.CharField(max_length=255, blank=True, help_text="Enter a book genre")
 
     def __str__(self):
         return self.name
@@ -15,7 +15,7 @@ class Book(models.Model):
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
     summary = models.TextField(max_length=1100, help_text='Description...')
     isbn = models.CharField(max_length=13, help_text='13 characters')
-    genre = models.ManyToManyField(Genre, help_text='Select a genre')
+    genre = models.ManyToManyField(Genre, help_text='Select a genre', blank=True)
 
     def __str__(self):
         return self.title
@@ -24,11 +24,16 @@ class Book(models.Model):
         return reverse('book-detail', args=[str(self.id)])
 
 
+    #def display_genre(self):
+    #    return ', '.join([ genre_name for genre in self.genre.all()[:3] ])
+    #display_genre.short_description = 'Genre'
+
+
 class BookInstance(models.Model):
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, help_text='Book ID')
-    return_back_day = models.DateField(blank=False)
+    return_back_day = models.DateField(blank=True, null=True)
 
     loan_status = (('o', 'on loan'), ('a', 'available'),
                    )
@@ -37,7 +42,7 @@ class BookInstance(models.Model):
                               blank=True, default='a', help_text='Book availability')
 
     def __str__(self):
-        return (self.id, self.book.title)
+        return f'{self.id} {self.book.title}'
 
 
 
@@ -50,4 +55,4 @@ class Author(models.Model):
         return reverse('author-detail', args=[str(self.id)])
     
     def __str__(self):
-        return (self.fname, self.lname)
+        return f'{self.fname, self.lname}'

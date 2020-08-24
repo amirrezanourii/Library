@@ -1,0 +1,18 @@
+{% extends 'bookcase_app/base.html' %}
+
+{% block content %}
+    <h1>Title: {{ book.title }}</h1>
+    <p><strong>Genre: </strong> <a href="{{ book.author }}"</a></p>
+    <p><strong>Summary: </strong> {{ book.summary }}</p>
+    <p><strong>ISBN: </strong> {{ book.isbn }}</p>
+
+    <div style='margin-left: 20px;margin-top: 20px'>
+        <h2>Copies</h2>
+        {% for copy in book.BookInstance_set.all() %}
+        <hr>
+        <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'o' %}text-danger"
+            {% if copy.status != 'a'%}<p><strong>Due to be returned:</strong> {{ copy.return_back_day }}</p>{% endif %}
+            <p class="text-muted">ID: {{ copy.id }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}
