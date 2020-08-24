@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h1>Library Home</h1>
+    
+    <p>Welcome to <strong>Library</strong>!</p>
+
+    <p>You can see the library records below</p>
+    <ul>
+        <li>Books: {{ book_number }} </li>
+        <li>Available Books: {{ available_books }}</li>
+    </ul>
+
+{% endblock %}
