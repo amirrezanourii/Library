@@ -13,12 +13,13 @@
 
     <ul class="menu">
         <li {% if section == "All Books" %}class="selected"{% endif %}>
-         <a href="#">All Books</a>
+         <a href="book_list">All Books</a>
         </li>
         <li {% if section == "Availables" %}class="selected"{% endif %}>
             <a href="#">Availables</a>
         </li>
-        <li><a href="/admin/">Admin</a></li>
+        <li {% if section == "Admin" %}class="selected"{% endif %}>
+            <a href="/admin/">Admin</a></li>
     </ul>
     </div>
 

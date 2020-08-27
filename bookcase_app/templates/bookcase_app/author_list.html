@@ -1,0 +1,9 @@
+{% extends 'bookcase_app/base.html' %}
+
+
+{%block content%}
+    {% for author in author_list %}
+        <h1>Authors name: {{ author.fname }} {{ author.lname }}</h1>
+        
+    {% endfor %}
+{% endblock %}
