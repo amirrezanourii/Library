@@ -1,17 +1,18 @@
 from django.contrib import admin
+
 from . import models
 
 
 @admin.register(models.BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_filter = ('status', 'return_back_day')
+    list_display = ('book', 'borrower', 'status', 'return_back_day')
 
     fieldsets = (
         ("Information of the book", {
             'fields': ('book', 'id')
         }),
         ('Availability', {
-            'fields': ('status', 'return_back_day')
+            'fields': ('status', 'borrower', 'return_back_day')
         }),
     )
 

@@ -1,0 +1,18 @@
+{% extends "bookcase_app/base.html" %}
+
+{% block content %}
+
+    <h1>Borrowed Books</h1>
+    {% if bookinstance_list %}
+    <ul>
+        {% for bookinstance in bookinstance_list %}
+        <li class="{% if bookinstance.is_overdue %}text-danger {% endif %}">
+            <a href="{% url 'bookcase_app:book_detail' bookinstance.book.pk %}">{{ bookinstance.book.title }}</a>({{ bookinstance.return_back_day }})
+        </li>
+        {% endfor %}
+    </ul>
+    
+    {% else %}
+        <p>You haven't borrowed any books.</p>
+    {% endif %}
+{% endblock %}

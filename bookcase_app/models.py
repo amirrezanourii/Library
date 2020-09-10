@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 import uuid
+from accounts.models import User
+from datetime import date
 
 
 class Genre(models.Model):
@@ -32,14 +34,25 @@ class BookInstance(models.Model):
         primary_key=True, default=uuid.uuid4, help_text='Book ID')
     return_back_day = models.DateField(blank=True, null=True)
 
-    LOAN_STATUS = (('o', 'on loan'), ('a', 'available'),
-                   )
+    LOAN_STATUS = (('o', 'on loan'), 
+                   ('a', 'available'),
+                )
 
     status = models.CharField(max_length=1, choices=LOAN_STATUS,
                               blank=True, default='a', help_text='Book availability')
+    borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'{self.id}, {self.book.title}'
+        return self.book.title
+
+    class Meta:
+        permissions = (( 'can_mark_returned', 'set_book_as_returned' ), )
+
+    @property
+    def is_overdue(self):
+        if self.return_back_day and date.today() > self.return_back_day:
+            return True
+        return False
 
 
 class Author(models.Model):
