@@ -54,7 +54,6 @@ class LoanedBookByUser(LoginRequiredMixin, generic.ListView):
         return models.BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('return_back_day')
 
 
-
 def renew_book_librarian(request, pk):
 
     book_inst = get_object_or_404(models.BookInstance, pk=pk)
@@ -80,4 +79,6 @@ def renew_book_librarian(request, pk):
         form = RenewBookForm(initial={'renew_date': proposed_renewal_date, })
 
     return render(request, 'bookcase_app/book_renew_librarian.html', {'form': form, 'bookinst': book_inst})
-    
+
+    class AuthorDelete():
+        pass
