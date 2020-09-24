@@ -5,6 +5,10 @@ body {
   padding: 0;
   font-family: "Solway", serif;
   background-color: #235c46c9;
+  background-image: url('https://www.reganagency.com/wp-content/uploads/2018/04/library_00.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 a {

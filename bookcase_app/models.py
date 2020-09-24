@@ -59,9 +59,10 @@ class Author(models.Model):
     fname = models.CharField(max_length=200)
     lname = models.CharField(max_length=200)
     birthday = models.DateField(null=True, blank=True)
+    # books = models.OneToMany()
 
     def get_absolute_url(self):
-        return reverse('author_detail', args=[str(self.id)])
+        return reverse('bookcase_app:author', args=[str(self.id)])
 
     def __str__(self):
         return f'{self.fname, self.lname}'

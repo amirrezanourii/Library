@@ -6,8 +6,9 @@
     <title>{% block title %}{% endblock %}</title>
     <link href="{% static "bookcase_app/style.css" %}" rel="stylesheet">
 </head>
-
+<div style="background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.reganagency.com%2Flibrary-insurance%2Fny-library-insurance-program%2F&psig=AOvVaw1GiqCS8rVuuwLRieSD1jIe&ust=1600884688640000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPDz-Leu_esCFQAAAAAdAAAAABAD');">
 <body>
+     
     <div id="header">
     <span class="logo">Library</span>
 
@@ -36,10 +37,11 @@
     </div>
 
     <br>
-    <div id="content">
+    <div id="content" style="background: #4f8466;">
         {% block content %}
         {% endblock %}
     </div>
+</div>
 
    
 

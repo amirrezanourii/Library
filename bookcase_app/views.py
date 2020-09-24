@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from . import models
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 import datetime
 from .forms import RenewBookForm
 
@@ -45,6 +46,11 @@ class AuthorListView(generic.ListView):
     template_name = 'bookcase_app/author_list.html'
 
 
+class AuthorDetailView(generic.DetailView):
+    model = models.Author
+    template_name = 'bookcase_app/author_detail.html'
+
+
 class LoanedBookByUser(LoginRequiredMixin, generic.ListView):
     model = models.BookInstance
     template_name = 'bookcase_app/books_loaned_by_user.html'
@@ -80,5 +86,18 @@ def renew_book_librarian(request, pk):
 
     return render(request, 'bookcase_app/book_renew_librarian.html', {'form': form, 'bookinst': book_inst})
 
-    class AuthorDelete():
-        pass
+
+class AuthorCreate(generic.CreateView):
+    model = models.Author
+    fields = '__all__'
+    initial = {'date_of_death': '06/01/2017', }
+
+
+class AuthorUpdate(generic.UpdateView):
+    model = models.Author
+    fields = ['fname', 'lname', 'birthday']
+
+
+class AuthorDelete(generic.DeleteView):
+    model = models.Author
+    success_url = reverse_lazy('bookcase_app:author_list')
